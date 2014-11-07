@@ -4,8 +4,12 @@ lightblue:
   ports:
    - "8080:8080"
 #  volumes:
-#   - ./lightblueconfig:/opt/jboss/eap/modules/com/redhat/lightblue/main/
+#   - ./lightblue_config:/opt/jboss/eap/modules/com/redhat/lightblue/main/
   links:
-   - mongodb
+      - mongodb:mongodb
 mongodb:
   image: dockerfile/mongodb
+  command: mongod --rest --httpinterface --smallfiles
+  ports:
+   - "28017:28017"
+   - "27017:27017"
