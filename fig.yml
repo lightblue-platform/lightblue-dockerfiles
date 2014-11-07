@@ -1,0 +1,9 @@
+lightblue:
+  build: .
+  command: /opt/jboss/eap/bin/standalone.sh -b 0.0.0.0
+  ports:
+   - "8080:8080"
+  links:
+   - mongodb
+mongodb:
+  image: dockerfile/mongodb
