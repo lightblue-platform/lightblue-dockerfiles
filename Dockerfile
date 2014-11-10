@@ -10,7 +10,11 @@ RUN curl -o crud.war      https://repo1.maven.org/maven2/com/redhat/lightblue/re
 RUN curl -o metadata.war  https://repo1.maven.org/maven2/com/redhat/lightblue/rest/rest-metadata/$LIGHTBLUE_VERSION/rest-metadata-$LIGHTBLUE_VERSION.war && mv metadata.war $JBOSS_HOME/standalone/deployments/
 RUN mkdir -p $JBOSS_HOME/modules/com/redhat/lightblue/main
 
+# Enable debug
+RUN  sed -i '58,59 s/^##*//' $JBOSS_HOME/bin/standalone.conf
+
 ADD lightblue_config $JBOSS_HOME/modules/com/redhat/lightblue/main/
+
 
 #the image based already start the JBOSS, so I'm shut it down to the changes take place
 #RUN pkill -9 java
