@@ -6,8 +6,8 @@ ENV LIGHTBLUE_VERSION_MINOR 0
 ENV LIGHTBLUE_VERSION_MICRO 1
 ENV LIGHTBLUE_VERSION $LIGHTBLUE_VERSION_MAJOR.$LIGHTBLUE_VERSION_MINOR.$LIGHTBLUE_VERSION_MICRO
 
-ADD rest-crud.war  $JBOSS_HOME/standalone/deployments/
-ADD rest-metadata.war  $JBOSS_HOME/standalone/deployments/
+ADD /tmp/rest-crud.war  $JBOSS_HOME/standalone/deployments/
+ADD /tmp/rest-metadata.war  $JBOSS_HOME/standalone/deployments/
 
 RUN mkdir -p $JBOSS_HOME/modules/com/redhat/lightblue/main
 
