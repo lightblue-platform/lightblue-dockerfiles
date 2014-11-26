@@ -1,16 +1,22 @@
 lightblue:
-  build: .
-  command: /opt/jboss/eap/bin/standalone.sh -b 0.0.0.0
-  ports:
-   - "8080:8080"
-   - "8787:8787"
+    build: .
+    command: /opt/jboss/eap/bin/standalone.sh -b 0.0.0.0
+    ports:
+    - "8080:8080"
+    - "8787:8787"
 #  volumes:
 #   - ./lightblue_config:/opt/jboss/eap/modules/com/redhat/lightblue/main/
-  links:
-      - mongodb:mongodb
+    links:
+    - mongodb:mongodb
 mongodb:
-  image: dockerfile/mongodb
-  command: mongod --rest --httpinterface --smallfiles
-  ports:
-   - "28017:28017"
-   - "27017:27017"
+    image: dockerfile/mongodb
+    command: mongod --rest --httpinterface --smallfiles
+    ports:
+    - "28017:28017"
+    - "27017:27017"
+oracle:
+    image: alexeiled/docker-oracle-xe-11g
+    ports:
+    - "49160:22"
+    - "49161:1521"
+    - "49162:8080"
