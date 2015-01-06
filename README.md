@@ -25,4 +25,4 @@ Just clone this repository and inside this folder run `fig up`.
 
 # License
 
-The license of lightblue is [GPLv3](https://www.gnu.org/licenses/gpl.html).  See COPYING in root of project for the full text.
+The license of lightblue is [GPLv3](https://www.gnu.org/licenses/gpl.html).  See LICENSE in root of project for the full text.
