@@ -2,19 +2,17 @@
 
 This repository is responsible to create the lightblue project deploy on any machine using Docker.
 
-NOTE: As the firsts iterations we are going to use an image from our internal Docker repository because we are going to deploy using Red Hat JBoss EAP. There is a problem need to be solved to lightblue work with Wildfly right now, you can contribute solving this issue so we can remove the internal dependency (More about it on http://forum.lightblue.io/Unable-to-deploy-lightblue-on-wildfly-td4.html#a7 ).
-
 # Roadmap
 
 You can see what we are looking foward with this repository looking at the [Roadmap.md](https://github.com/lightblue-platform/lightblue-dockerfile/blob/master/Roadmap.md) file.
 
 # Requirements
 
-For this repository you will need to have [Docker](https://www.docker.com/) and [Fig](http://www.fig.sh/) installed. 
+For this repository you will need to have [Docker](https://www.docker.com/) and [Docker Compose](http://docs.docker.com/compose/) installed.
 
 # How to run
 
-Just clone this repository and inside this folder run `fig up`.
+Just clone this repository and inside this folder run `docker-compose up`.
 
 # Books!
 
