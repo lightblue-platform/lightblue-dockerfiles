@@ -1,5 +1,5 @@
 FROM paterczm/docker-fedora20-jbossas7
-MAINTAINER Luan Cestari <lcestari@redhat.com> 
+MAINTAINER Luan Cestari <lcestari@redhat.com>
 
 ENV LIGHTBLUE_VERSION_MAJOR 1
 ENV LIGHTBLUE_VERSION_MINOR 2
