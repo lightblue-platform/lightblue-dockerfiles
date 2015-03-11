@@ -12,7 +12,7 @@ For this repository you will need to have [Docker](https://www.docker.com/) and 
 
 # How to run
 
-Just clone this repository and inside this folder run `docker-compose up`.
+Just clone this repository, cd to a subdirectory reprsenting the lightblue version you want to boot, and run `docker-compose up`.
 
 # Books!
 
