@@ -14,6 +14,13 @@ For this repository you will need to have [Docker](https://www.docker.com/) and 
 
 Just clone this repository, cd to a subdirectory reprsenting the lightblue version you want to boot, and run `docker-compose up`.
 
+Once started, you will have following services available:
+
+* Data endpoint: http://localhost:8080/rest/data
+* Metadata endpoint: http://localhost:8080/rest/metadata
+* Data Management App: http://localhost:8081/app/data
+* Metadata Management App: http://localhost:8081/app/metadata
+
 # Books!
 
 * [Overview](http://jewzaam.gitbooks.io/lightblue/)
