@@ -7,8 +7,8 @@ ENV LIGHTBLUE_VERSION_MICRO 0-SNAPSHOT
 ENV LIGHTBLUE_VERSION $LIGHTBLUE_VERSION_MAJOR.$LIGHTBLUE_VERSION_MINOR.$LIGHTBLUE_VERSION_MICRO
 ENV JBOSS_HOME=/opt/jbossas7
 
-RUN curl -o $JBOSS_HOME/standalone/deployments/crud.war $(curl https://oss.sonatype.org/content/repositories/snapshots/com/redhat/lightblue/rest/rest-crud/$LIGHTBLUE_VERSION_MAJOR.$LIGHTBLUE_VERSION_MINOR.$LIGHTBLUE_VERSION_MICRO/ | grep -o -E "https://.*?war\"" | sed s/\"//)
-RUN curl -o $JBOSS_HOME/standalone/deployments/metadata.war $(curl https://oss.sonatype.org/content/repositories/snapshots/com/redhat/lightblue/rest/rest-metadata/$LIGHTBLUE_VERSION_MAJOR.$LIGHTBLUE_VERSION_MINOR.$LIGHTBLUE_VERSION_MICRO/ | grep -o -E "https://.*?war\"" | sed s/\"//)
+RUN curl -o $JBOSS_HOME/standalone/deployments/crud.war $(curl https://oss.sonatype.org/content/repositories/snapshots/com/redhat/lightblue/rest/lightblue-rest-crud/$LIGHTBLUE_VERSION_MAJOR.$LIGHTBLUE_VERSION_MINOR.$LIGHTBLUE_VERSION_MICRO/ | grep -o -E "https://.*?war\"" | sed s/\"//)
+RUN curl -o $JBOSS_HOME/standalone/deployments/metadata.war $(curl https://oss.sonatype.org/content/repositories/snapshots/com/redhat/lightblue/rest/lightblue-rest-metadata/$LIGHTBLUE_VERSION_MAJOR.$LIGHTBLUE_VERSION_MINOR.$LIGHTBLUE_VERSION_MICRO/ | grep -o -E "https://.*?war\"" | sed s/\"//)
 RUN mkdir -p $JBOSS_HOME/modules/com/redhat/lightblue/main
 
 ADD lightblue_config $JBOSS_HOME/modules/com/redhat/lightblue/main/
