@@ -3,6 +3,8 @@ lightblue:
   command: /opt/jbossas7/bin/standalone.sh -b 0.0.0.0
   ports:
    - "8080:8080"
+#  volumes:
+#   - ./lightblue_config:/opt/jboss/eap/modules/com/redhat/lightblue/main/
   links:
       - mongodb:mongodb
 mongodb:
@@ -12,7 +14,7 @@ mongodb:
    - "28017:28017"
    - "27017:27017"
 applications:
-  image: lightblue/applications:latest
+  image: lightblue/applications:1.2.0
   command: /opt/jbossas7/bin/standalone.sh -b 0.0.0.0
   ports:
    - "8081:8080"
