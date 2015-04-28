@@ -1,8 +1,9 @@
 lightblue:
   build: .
-  command: /opt/jbossas7/bin/standalone.sh -b 0.0.0.0
+  command: /opt/jbossas7/bin/standalone.sh -b 0.0.0.0 -Djboss.bind.address.management=0.0.0.0
   ports:
    - "8080:8080"
+   - "9999:9999"
   links:
       - mongodb:mongodb
 mongodb:
