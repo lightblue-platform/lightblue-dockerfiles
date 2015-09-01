@@ -21,6 +21,15 @@ Once started, you will have following services available:
 * Data Management App: http://localhost:8081/app/data
 * Metadata Management App: http://localhost:8081/app/metadata
 
+## Running without docker-compose
+Docker-compose does not work everywhere (at the time of writing, it's broken on Fedora 22). Here is how you can link lightblue containers togeather using only docker:
+```
+docker run -d --name mongodb docker.io/mongo mongod --rest --httpinterface --smallfiles
+docker run -d -p 8080:8080 -p 9999:9999 --name lightblue --link mongodb:mongodb docker.io/lightblue/lightblue /opt/jbossas7/bin/standalone.sh -b 0.0.0.0 -Djboss.bind.address.management=0.0.0.0
+```
+
+See [dockerlinks](https://docs.docker.com/userguide/dockerlinks/) documentation for detauls. **WARNING**: Until fixed, [linking does not work on Fedora 22](https://forums.docker.com/t/docker-update-on-fedora-22-can-not-link-containers/2484)! Adjust firewall settings: ```sudo iptables -A DOCKER -p tcp -j ACCEPT```.
+
 # Books!
 
 * [Overview](http://jewzaam.gitbooks.io/lightblue/)
