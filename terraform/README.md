@@ -15,7 +15,7 @@ You can specify versions:
 ```
 terraform apply -var 'lightblue_version:1.2.0' -var 'lightblue_apps_version:1.2.0'
 ```
-By default, latest version is taken.
+By default, latest version is taken. See Docker Hub for a list of all available [lightblue versions](https://hub.docker.com/r/lightblue/lightblue/tags/) and [lightblue apps versions](https://hub.docker.com/r/lightblue/applications/tags/).
 
 Once started, you will have following services available:
 
