@@ -21,7 +21,9 @@ Once started, you will have following services available:
 * Data Management App: http://localhost:8081/app/data
 * Metadata Management App: http://localhost:8081/app/metadata
 
-## Running without docker-compose
+## [Running using terraform](terraform)
+
+## Running using bare docker
 Docker-compose does not work everywhere (at the time of writing, it's broken on Fedora 22). Here is how you can link lightblue containers togeather using only docker:
 ```
 docker run -d --name mongodb docker.io/mongo mongod --rest --httpinterface --smallfiles
