@@ -18,10 +18,10 @@ resource "docker_container" "lightblue" {
            "internal" = "8080"
            "external" = "${var.lightblue_port}"
         }
-        #ports {
-        #   "internal" = "9999"
-        #   "external" = "9999"
-        #}
+        ports {
+           "internal" = "9999"
+           "external" = "9999"
+        }
         links = ["lbmongo:mongodb"]
         command = ["/opt/jbossas7/bin/standalone.sh", "-b", "0.0.0.0", "-Djboss.bind.address.management=0.0.0.0"]
         depends_on = ["docker_container.mongo"]
