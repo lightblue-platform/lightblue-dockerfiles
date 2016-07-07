@@ -7,3 +7,5 @@ release.properties
 *.zip
 *.tar.gz
 build
+*.tfstate
+*.backup
