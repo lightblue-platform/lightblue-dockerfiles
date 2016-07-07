@@ -32,7 +32,7 @@ resource "docker_image" "mongo" {
 }
 
 resource "docker_image" "lightblue" {
-        name = "lightblue:${var.lightblue_version}"
+        name = "docker.io/lightblue/lightblue:${var.lightblue_version}"
 }
 
 variable "lightblue_version" {
