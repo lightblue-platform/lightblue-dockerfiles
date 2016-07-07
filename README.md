@@ -2,42 +2,40 @@
 
 This repository is responsible to create the lightblue project deploy on any machine using Docker.
 
-# Roadmap
-
-You can see what we are looking foward with this repository looking at the [Roadmap.md](https://github.com/lightblue-platform/lightblue-dockerfile/blob/master/Roadmap.md) file.
-
 # Requirements
 
-For this repository you will need to have [Docker](https://www.docker.com/) and [Docker Compose](http://docs.docker.com/compose/) installed.
+You will need to have [Docker](https://www.docker.com/) and [Terraform](https://www.terraform.io/intro/index.html) installed.
 
-# How to run
+Why not [Docker Compose](http://docs.docker.com/compose/)? I wasn't able to get it to work on Fedora 22 and got fed up with it.
 
-Just clone this repository, cd to a subdirectory reprsenting the lightblue version you want to boot, and run `docker-compose up`.
+# Running using terraform
+
+To install Terraform, just [download](https://www.terraform.io/downloads.html) and unpack it. No setup is needed.
+
+Clone this repository. Assuming you have docker available via tcp://127.0.0.1:4243, run (where main.tf script is):
+```
+terraform apply
+```
+
+You can specify versions:
+```
+terraform apply -var 'lightblue_version=2.7.0'
+```
+By default, latest version is taken. See Docker Hub for a list of all available [lightblue versions](https://hub.docker.com/r/lightblue/lightblue/tags/).
 
 Once started, you will have following services available:
 
 * Data endpoint: http://localhost:8080/rest/data
 * Metadata endpoint: http://localhost:8080/rest/metadata
-* Data Management App: http://localhost:8081/app/data
-* Metadata Management App: http://localhost:8081/app/metadata
-
-## [Running using terraform](terraform)
 
 ## Running using bare docker
-Docker-compose does not work everywhere (at the time of writing, it's broken on Fedora 22). Here is how you can link lightblue containers togeather using only docker:
+Here is how you can link lightblue containers togeather using docker:
 ```
 docker run -d --name mongodb docker.io/mongo mongod --rest --httpinterface --smallfiles
-docker run -d -p 8080:8080 -p 9999:9999 --name lightblue --link mongodb:mongodb docker.io/lightblue/lightblue /opt/jbossas7/bin/standalone.sh -b 0.0.0.0 -Djboss.bind.address.management=0.0.0.0
+docker run -d -p 8080:8080 -p 9999:9999 --name lightblue --link mongodb:mongodb docker.io/lightblue/lightblue /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0 -Djboss.bind.address.management=0.0.0.0
 ```
 
-See [dockerlinks](https://docs.docker.com/userguide/dockerlinks/) documentation for detauls. **WARNING**: Until fixed, [linking does not work on Fedora 22](https://forums.docker.com/t/docker-update-on-fedora-22-can-not-link-containers/2484)! Adjust firewall settings: ```sudo iptables -A DOCKER -p tcp -j ACCEPT```.
-
-# Books!
-
-* [Overview](http://jewzaam.gitbooks.io/lightblue/)
-* [User Guide](http://jewzaam.gitbooks.io/lightblue-user-guide/)
-* [Developer Manual](http://jewzaam.gitbooks.io/lightblue-developer-manual/)
-
+See [dockerlinks](https://docs.docker.com/userguide/dockerlinks/) documentation for details. **WARNING**: Until fixed, [linking does not work on Fedora 22](https://forums.docker.com/t/docker-update-on-fedora-22-can-not-link-containers/2484)! Adjust firewall settings: ```sudo iptables -A DOCKER -p tcp -j ACCEPT```.
 
 # License
 
