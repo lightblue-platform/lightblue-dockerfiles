@@ -21,7 +21,7 @@ You can specify versions:
 ```
 terraform apply -var 'lightblue_version=2.7.0'
 ```
-By default, latest version is taken. See Docker Hub for a list of all available [lightblue versions](https://hub.docker.com/r/lightblue/lightblue/tags/).
+By default, latest version is taken. See Docker Hub for a list of all available [lightblue versions](https://hub.docker.com/r/lightblue/lightblue/tags/). For 1.x versions you'll need to use 1.x branch of this repository.
 
 Once started, you will have following services available:
 
