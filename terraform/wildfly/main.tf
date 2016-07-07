@@ -27,19 +27,6 @@ resource "docker_container" "lightblue" {
         depends_on = ["docker_container.mongo"]
 }
 
-# Create a lightblue applications container
-resource "docker_container" "lightblue_apps" {
-        image = "${docker_image.lightblue_apps.latest}"
-        name = "lightblue_apps"
-        ports {
-           "internal" = "8080"
-           "external" = "${var.lightblue_apps_port}"
-        }
-        links = ["lightblue:lightblue"]
-        command = ["/opt/jbossas7/bin/standalone.sh", "-b", "0.0.0.0"]
-        depends_on = ["docker_container.lightblue"]
-}
-
 resource "docker_image" "mongo" {
         name = "docker.io/mongo:latest"
 }
@@ -48,23 +35,10 @@ resource "docker_image" "lightblue" {
         name = "lightblue:${var.lightblue_version}"
 }
 
-resource "docker_image" "lightblue_apps" {
-        name = "docker.io/lightblue/applications:${var.lightblue_apps_version}"
-}
-
 variable "lightblue_version" {
     default = "latest"
 }
 
-
 variable "lightblue_port" {
     default = "8080"
-}
-
-variable "lightblue_apps_version" {
-    default = "latest"
-}
-
-variable "lightblue_apps_port" {
-    default = "8081"
 }
