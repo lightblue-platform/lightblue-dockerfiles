@@ -1,0 +1,14 @@
+{
+    "collection": "metadata",
+    "dataSource": "metadata",
+    "documentation": [
+        "type - REQUIRED - the class implementing MetadataConfiguration interface",
+        "hookConfigurationParsers - OPTIONAL - array of classes implementing HookConfigurationParser interface",
+        "roleMap - OPTIONAL - map of metadata roles to array of roles allowed.  expected keys: metadata.find.dependencies, metadata.find.roles, metadata.find.entityNames, metadata.find.entityVersions, metadata.find.entityVersions, metadata.find.entityMetadata, metadata.insert, metadata.insert.schema, metadata.update.entityInfo, metadata.update.schemaStatus, metadata.update.defaultVersion, metadata.delete.entity",
+        "The remainder of the file is parsed by the implementation class"
+    ],
+    "hookConfigurationParsers": [
+        "org.esbtools.lightbluenotificationhook.NotificationHookConfigurationParser"
+    ],
+    "type": "com.redhat.lightblue.mongo.config.MongoMetadataConfiguration"
+}

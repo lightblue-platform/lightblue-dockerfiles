@@ -1,0 +1,1045 @@
+{
+    "entityInfo" : {
+        "datastore" : {
+            "backend" : "mongo",
+            "collection" : "user",
+            "datasource" : "mongodata"
+        },
+        "defaultVersion" : "0.0.8",
+        "enums" : [
+            {
+                "annotatedValues" : [
+                    {
+                        "description" : "An address that can be used for billing.",
+                        "name" : "billTo"
+                    },
+                    {
+                        "description" : "An address used for sending marketing material.  Also used as a general / default address.",
+                        "name" : "market"
+                    },
+                    {
+                        "description" : "An address that can be used for shipping goods.",
+                        "name" : "shipTo"
+                    }
+                ],
+                "name" : "addressType",
+                "values" : [
+                    "billTo",
+                    "market",
+                    "shipTo"
+                ]
+            },
+            {
+                "name" : "accessLevel",
+                "values" : [
+                    "admin",
+                    "read",
+                    "write"
+                ]
+            },
+            {
+                "annotatedValues" : [
+                    {
+                        "description" : "general bucket for unclassified phone number",
+                        "name" : "other"
+                    },
+                    {
+                        "description" : "a fax number",
+                        "name" : "fax"
+                    }
+                ],
+                "name" : "phoneType",
+                "values" : [
+                    "fax",
+                    "other"
+                ]
+            },
+            {
+                "annotatedValues" : [
+                    {
+                        "description" : "The developer.redhat login provider",
+                        "name" : "developer.redhat.com"
+                    },
+                    {
+                        "description" : "The Microsoft login provider",
+                        "name" : "Microsoft"
+                    },
+                    {
+                        "description" : "The jboss.org login provider",
+                        "name" : "jboss.org"
+                    },
+                    {
+                        "description" : "The provider for any properties using Red Hat SSO.",
+                        "name" : "Red Hat"
+                    }
+                ],
+                "name" : "providerName",
+                "values" : [
+                    "Microsoft",
+                    "Red Hat",
+                    "developer.redhat.com",
+                    "jboss.org"
+                ]
+            },
+            {
+                "annotatedValues" : [
+                    {
+                        "description" : "User is able to log in.",
+                        "name" : "enabled"
+                    },
+                    {
+                        "description" : "User is not able to log in.",
+                        "name" : "disabled"
+                    }
+                ],
+                "name" : "status",
+                "values" : [
+                    "disabled",
+                    "enabled"
+                ]
+            }
+        ],
+        "indexes" : [
+            {
+                "fields" : [
+                    {
+                        "dir" : "$asc",
+                        "field" : "personalInformation.lastNames"
+                    }
+                ],
+                "name" : "user_personalInformation_lastNames"
+            },
+            {
+                "fields" : [
+                    {
+                        "dir" : "$asc",
+                        "field" : "personalInformation.firstName"
+                    }
+                ],
+                "name" : "user_personalInformation_firstName"
+            },
+            {
+                "fields" : [
+                    {
+                        "dir" : "$asc",
+                        "field" : "authentications.principal"
+                    },
+                    {
+                        "dir" : "$asc",
+                        "field" : "authentications.providerName"
+                    },
+                    {
+                        "dir" : "$asc",
+                        "field" : "isUserSimple"
+                    }
+                ],
+                "name" : "user_authentication_principal_providerName_isUserSimple",
+                "unique" : true
+            },
+            {
+                "fields" : [
+                    {
+                        "dir" : "$asc",
+                        "field" : "authentications.uid"
+                    }
+                ],
+                "name" : "user_authentications_uid"
+            },
+            {
+                "fields" : [
+                    {
+                        "dir" : "$asc",
+                        "field" : "preferences.system"
+                    },
+                    {
+                        "dir" : "$asc",
+                        "field" : "preferences.code"
+                    }
+                ],
+                "name" : "user_preference"
+            },
+            {
+                "fields" : [
+                    {
+                        "dir" : "$asc",
+                        "field" : "legalEntities.emails.address"
+                    }
+                ],
+                "name" : "user_legalEntities_emails_address"
+            },
+            {
+                "fields" : [
+                    {
+                        "dir" : "$asc",
+                        "field" : "legalEntities.emails.address"
+                    }
+                ],
+                "name" : "user_legalEntities_emails_address_ci"
+            },
+            {
+                "fields" : [
+                    {
+                        "dir" : "$asc",
+                        "field" : "legalEntities.emails.validation.key"
+                    }
+                ],
+                "name" : "user_legalEntity_email_validation_key"
+            },
+            {
+                "fields" : [
+                    {
+                        "dir" : "$asc",
+                        "field" : "legalEntities.physicalAddresses.uid"
+                    }
+                ],
+                "name" : "user_legalEntity_physicalAddresses_uid"
+            },
+            {
+                "fields" : [
+                    {
+                        "dir" : "$asc",
+                        "field" : "legalEntities.legalEntityId"
+                    }
+                ],
+                "name" : "user_legalEntity"
+            },
+            {
+                "fields" : [
+                    {
+                        "dir" : "$asc",
+                        "field" : "legalEntities.permissions.permissionCode"
+                    }
+                ],
+                "name" : "user_permissionCode"
+            },
+            {
+                "fields" : [
+                    {
+                        "dir" : "$asc",
+                        "field" : "_id"
+                    }
+                ],
+                "name" : null,
+                "unique" : true
+            }
+        ],
+        "name" : "user"
+    },
+    "schema" : {
+        "access" : {
+            "delete" : [
+                "lb-user-delete"
+            ],
+            "find" : [
+                "lb-user-find"
+            ],
+            "insert" : [
+                "lb-user-insert"
+            ],
+            "update" : [
+                "lb-user-update"
+            ]
+        },
+        "fields" : {
+            "_id" : {
+                "access" : {
+                    "update" : [
+                        "noone"
+                    ]
+                },
+                "constraints" : {
+                    "identity" : true
+                },
+                "type" : "integer",
+                "valueGenerator" : {
+                    "configuration" : {
+                        "initialValue" : "50000000",
+                        "name" : "userIdIntSequence"
+                    },
+                    "type" : "IntSequence"
+                }
+            },
+            "authentications" : {
+                "constraints" : {
+                    "minItems" : 1,
+                    "required" : true
+                },
+                "items" : {
+                    "fields" : {
+                        "createdBy" : {
+                            "access" : {
+                                "update" : [
+                                    "lb-migrateFields-update"
+                                ]
+                            },
+                            "type" : "string"
+                        },
+                        "creationDate" : {
+                            "access" : {
+                                "update" : [
+                                    "lb-migrateFields-update"
+                                ]
+                            },
+                            "type" : "date",
+                            "valueGenerator" : {
+                                "type" : "CurrentTime"
+                            }
+                        },
+                        "disabledDate" : {
+                            "type" : "date"
+                        },
+                        "lastUpdateDate" : {
+                            "type" : "date",
+                            "valueGenerator" : {
+                                "overwrite" : true,
+                                "type" : "CurrentTime"
+                            }
+                        },
+                        "lastUpdatedBy" : {
+                            "type" : "string"
+                        },
+                        "mechanism" : {
+                            "entity" : "userAuthenticationMechanism",
+                            "query" : {
+                                "field" : "code",
+                                "op" : "$eq",
+                                "rfield" : "$parent.mechanismCode"
+                            },
+                            "type" : "reference",
+                            "versionValue" : "0.0.2"
+                        },
+                        "mechanismCode" : {
+                            "type" : "string"
+                        },
+                        "principal" : {
+                            "constraints" : {
+                                "maxLength" : 250,
+                                "minLength" : 1,
+                                "required" : true
+                            },
+                            "type" : "string"
+                        },
+                        "principalDisplay" : {
+                            "constraints" : {
+                                "required" : true
+                            },
+                            "type" : "string"
+                        },
+                        "profileUrl" : {
+                            "type" : "string"
+                        },
+                        "providerName" : {
+                            "constraints" : {
+                                "enum" : "providerName",
+                                "required" : true
+                            },
+                            "type" : "string"
+                        },
+                        "providerPrincipal" : {
+                            "type" : "string"
+                        },
+                        "status" : {
+                            "constraints" : {
+                                "enum" : "status"
+                            },
+                            "type" : "string"
+                        },
+                        "uid" : {
+                            "constraints" : {
+                                "element-identity" : true
+                            },
+                            "type" : "integer",
+                            "valueGenerator" : {
+                                "configuration" : {
+                                    "initialValue" : "100",
+                                    "name" : "authenticationUidIntSequence"
+                                },
+                                "type" : "IntSequence"
+                            }
+                        },
+                        "userJbossCredentials" : {
+                            "entity" : "userJbossCredential",
+                            "query" : {
+                                "$and" : [
+                                    {
+                                        "field" : "userId",
+                                        "op" : "$eq",
+                                        "rfield" : "$parent.$parent._id"
+                                    }
+                                ]
+                            },
+                            "type" : "reference",
+                            "versionValue" : "0.0.1"
+                        },
+                        "userRedHatCredentials" : {
+                            "entity" : "userRedHatCredential",
+                            "query" : {
+                                "$and" : [
+                                    {
+                                        "field" : "userId",
+                                        "op" : "$eq",
+                                        "rfield" : "$parent.$parent._id"
+                                    }
+                                ]
+                            },
+                            "type" : "reference",
+                            "versionValue" : "0.0.6"
+                        }
+                    },
+                    "type" : "object"
+                },
+                "type" : "array"
+            },
+            "authentications#" : {
+                "access" : {
+                    "find" : [
+                        "anyone"
+                    ]
+                },
+                "type" : "integer"
+            },
+            "createdBy" : {
+                "access" : {
+                    "update" : [
+                        "lb-migrateFields-update"
+                    ]
+                },
+                "constraints" : {
+                    "required" : true
+                },
+                "type" : "string"
+            },
+            "creationDate" : {
+                "access" : {
+                    "update" : [
+                        "lb-migrateFields-update"
+                    ]
+                },
+                "constraints" : {
+                    "required" : true
+                },
+                "type" : "date",
+                "valueGenerator" : {
+                    "type" : "CurrentTime"
+                }
+            },
+            "isUserSimple" : {
+                "constraints" : {
+                    "required" : true
+                },
+                "type" : "boolean"
+            },
+            "lastUpdateDate" : {
+                "constraints" : {
+                    "required" : true
+                },
+                "type" : "date",
+                "valueGenerator" : {
+                    "overwrite" : true,
+                    "type" : "CurrentTime"
+                }
+            },
+            "lastUpdatedBy" : {
+                "constraints" : {
+                    "required" : true
+                },
+                "type" : "string"
+            },
+            "legalEntities" : {
+                "items" : {
+                    "fields" : {
+                        "department" : {
+                            "type" : "string"
+                        },
+                        "emails" : {
+                            "items" : {
+                                "fields" : {
+                                    "address" : {
+                                        "constraints" : {
+                                            "required" : true
+                                        },
+                                        "type" : "string"
+                                    },
+                                    "isPrimary" : {
+                                        "type" : "boolean"
+                                    },
+                                    "physicalAddressUid" : {
+                                        "access" : {
+                                            "find" : [
+                                                "lb-classicServices-find",
+                                                "lb-migrateFields-find"
+                                            ],
+                                            "insert" : [
+                                                "lb-classicServices-insert",
+                                                "lb-migrateFields-insert"
+                                            ],
+                                            "update" : [
+                                                "lb-classicServices-update",
+                                                "lb-migrateFields-update"
+                                            ]
+                                        },
+                                        "type" : "integer"
+                                    },
+                                    "status" : {
+                                        "constraints" : {
+                                            "enum" : "status",
+                                            "required" : true
+                                        },
+                                        "type" : "string"
+                                    },
+                                    "uid" : {
+                                        "constraints" : {
+                                            "element-identity" : true
+                                        },
+                                        "type" : "string",
+                                        "valueGenerator" : {
+                                            "type" : "UUID"
+                                        }
+                                    },
+                                    "validation" : {
+                                        "fields" : {
+                                            "attempts" : {
+                                                "type" : "integer"
+                                            },
+                                            "creationDate" : {
+                                                "constraints" : {
+                                                    "required" : true
+                                                },
+                                                "type" : "date",
+                                                "valueGenerator" : {
+                                                    "type" : "CurrentTime"
+                                                }
+                                            },
+                                            "expirationDate" : {
+                                                "type" : "date"
+                                            },
+                                            "key" : {
+                                                "type" : "string"
+                                            },
+                                            "validationDate" : {
+                                                "type" : "date"
+                                            }
+                                        },
+                                        "type" : "object"
+                                    }
+                                },
+                                "type" : "object"
+                            },
+                            "type" : "array"
+                        },
+                        "emails#" : {
+                            "access" : {
+                                "find" : [
+                                    "anyone"
+                                ]
+                            },
+                            "type" : "integer"
+                        },
+                        "endDate" : {
+                            "type" : "date"
+                        },
+                        "legalEntity" : {
+                            "entity" : "legalEntity",
+                            "query" : {
+                                "field" : "_id",
+                                "op" : "$eq",
+                                "rfield" : "$parent.legalEntityId"
+                            },
+                            "type" : "reference",
+                            "versionValue" : "0.0.3"
+                        },
+                        "legalEntityId" : {
+                            "type" : "integer"
+                        },
+                        "permissions" : {
+                            "items" : {
+                                "fields" : {
+                                    "accessLevel" : {
+                                        "constraints" : {
+                                            "enum" : "accessLevel"
+                                        },
+                                        "type" : "string"
+                                    },
+                                    "endDate" : {
+                                        "type" : "date"
+                                    },
+                                    "permission" : {
+                                        "entity" : "userPermission",
+                                        "query" : {
+                                            "field" : "code",
+                                            "op" : "$eq",
+                                            "rfield" : "$parent.permissionCode"
+                                        },
+                                        "type" : "reference",
+                                        "versionValue" : "0.0.2"
+                                    },
+                                    "permissionCode" : {
+                                        "constraints" : {
+                                            "required" : true
+                                        },
+                                        "type" : "string"
+                                    },
+                                    "startDate" : {
+                                        "constraints" : {
+                                            "required" : true
+                                        },
+                                        "type" : "date"
+                                    },
+                                    "uid" : {
+                                        "constraints" : {
+                                            "element-identity" : true
+                                        },
+                                        "type" : "string",
+                                        "valueGenerator" : {
+                                            "type" : "UUID"
+                                        }
+                                    }
+                                },
+                                "type" : "object"
+                            },
+                            "type" : "array"
+                        },
+                        "permissions#" : {
+                            "access" : {
+                                "find" : [
+                                    "anyone"
+                                ]
+                            },
+                            "type" : "integer"
+                        },
+                        "physicalAddresses" : {
+                            "items" : {
+                                "fields" : {
+                                    "addressTypes" : {
+                                        "items" : {
+                                            "fields" : {
+                                                "code" : {
+                                                    "constraints" : {
+                                                        "enum" : "addressType",
+                                                        "required" : true
+                                                    },
+                                                    "type" : "string"
+                                                },
+                                                "status" : {
+                                                    "constraints" : {
+                                                        "enum" : "status",
+                                                        "required" : true
+                                                    },
+                                                    "type" : "string"
+                                                },
+                                                "uid" : {
+                                                    "constraints" : {
+                                                        "element-identity" : true
+                                                    },
+                                                    "type" : "integer",
+                                                    "valueGenerator" : {
+                                                        "configuration" : {
+                                                            "initialValue" : "25000000",
+                                                            "name" : "userLegalEntitiesPhysicalAddressesAddressTypesUidIntSequence"
+                                                        },
+                                                        "type" : "IntSequence"
+                                                    }
+                                                }
+                                            },
+                                            "type" : "object"
+                                        },
+                                        "type" : "array"
+                                    },
+                                    "addressTypes#" : {
+                                        "access" : {
+                                            "find" : [
+                                                "anyone"
+                                            ]
+                                        },
+                                        "type" : "integer"
+                                    },
+                                    "city" : {
+                                        "type" : "string"
+                                    },
+                                    "countryIso2Code" : {
+                                        "constraints" : {
+                                            "maxLength" : 2,
+                                            "minLength" : 2,
+                                            "required" : true
+                                        },
+                                        "type" : "string"
+                                    },
+                                    "county" : {
+                                        "type" : "string"
+                                    },
+                                    "defaultFlag" : {
+                                        "constraints" : {
+                                            "required" : true
+                                        },
+                                        "type" : "boolean"
+                                    },
+                                    "description" : {
+                                        "type" : "string"
+                                    },
+                                    "firstName" : {
+                                        "access" : {
+                                            "find" : [
+                                                "lb-classicServices-find",
+                                                "lb-migrateFields-find"
+                                            ],
+                                            "insert" : [
+                                                "lb-classicServices-insert",
+                                                "lb-migrateFields-insert"
+                                            ],
+                                            "update" : [
+                                                "lb-classicServices-update",
+                                                "lb-migrateFields-update"
+                                            ]
+                                        },
+                                        "type" : "string"
+                                    },
+                                    "lastNames" : {
+                                        "access" : {
+                                            "find" : [
+                                                "lb-classicServices-find",
+                                                "lb-migrateFields-find"
+                                            ],
+                                            "insert" : [
+                                                "lb-classicServices-insert",
+                                                "lb-migrateFields-insert"
+                                            ],
+                                            "update" : [
+                                                "lb-classicServices-update",
+                                                "lb-migrateFields-update"
+                                            ]
+                                        },
+                                        "type" : "string"
+                                    },
+                                    "postalCode" : {
+                                        "type" : "string"
+                                    },
+                                    "state" : {
+                                        "type" : "string"
+                                    },
+                                    "status" : {
+                                        "constraints" : {
+                                            "enum" : "status",
+                                            "required" : true
+                                        },
+                                        "type" : "string"
+                                    },
+                                    "street" : {
+                                        "items" : {
+                                            "type" : "string"
+                                        },
+                                        "type" : "array"
+                                    },
+                                    "street#" : {
+                                        "access" : {
+                                            "find" : [
+                                                "anyone"
+                                            ]
+                                        },
+                                        "type" : "integer"
+                                    },
+                                    "uid" : {
+                                        "constraints" : {
+                                            "element-identity" : true
+                                        },
+                                        "type" : "integer",
+                                        "valueGenerator" : {
+                                            "configuration" : {
+                                                "initialValue" : "25000000",
+                                                "name" : "userLegalEntitiesPhysicalAddressesUidIntSequence"
+                                            },
+                                            "type" : "IntSequence"
+                                        }
+                                    }
+                                },
+                                "type" : "object"
+                            },
+                            "type" : "array"
+                        },
+                        "physicalAddresses#" : {
+                            "access" : {
+                                "find" : [
+                                    "anyone"
+                                ]
+                            },
+                            "type" : "integer"
+                        },
+                        "startDate" : {
+                            "constraints" : {
+                                "required" : true
+                            },
+                            "type" : "date"
+                        },
+                        "telephones" : {
+                            "items" : {
+                                "fields" : {
+                                    "areaCode" : {
+                                        "type" : "string"
+                                    },
+                                    "countryCode" : {
+                                        "type" : "string"
+                                    },
+                                    "extension" : {
+                                        "type" : "string"
+                                    },
+                                    "isPrimary" : {
+                                        "type" : "boolean"
+                                    },
+                                    "number" : {
+                                        "type" : "string"
+                                    },
+                                    "phoneType" : {
+                                        "constraints" : {
+                                            "enum" : "phoneType",
+                                            "required" : true
+                                        },
+                                        "type" : "string"
+                                    },
+                                    "physicalAddressUid" : {
+                                        "access" : {
+                                            "find" : [
+                                                "lb-classicServices-find",
+                                                "lb-migrateFields-find"
+                                            ],
+                                            "insert" : [
+                                                "lb-classicServices-insert",
+                                                "lb-migrateFields-insert"
+                                            ],
+                                            "update" : [
+                                                "lb-classicServices-update",
+                                                "lb-migrateFields-update"
+                                            ]
+                                        },
+                                        "type" : "integer"
+                                    },
+                                    "rawNumber" : {
+                                        "constraints" : {
+                                            "required" : true
+                                        },
+                                        "type" : "string"
+                                    },
+                                    "status" : {
+                                        "constraints" : {
+                                            "enum" : "status",
+                                            "required" : true
+                                        },
+                                        "type" : "string"
+                                    },
+                                    "uid" : {
+                                        "constraints" : {
+                                            "required" : true
+                                        },
+                                        "type" : "string",
+                                        "valueGenerator" : {
+                                            "type" : "UUID"
+                                        }
+                                    }
+                                },
+                                "type" : "object"
+                            },
+                            "type" : "array"
+                        },
+                        "telephones#" : {
+                            "access" : {
+                                "find" : [
+                                    "anyone"
+                                ]
+                            },
+                            "type" : "integer"
+                        },
+                        "title" : {
+                            "constraints" : {
+                                "maxLength" : 128
+                            },
+                            "type" : "string"
+                        },
+                        "uid" : {
+                            "constraints" : {
+                                "element-identity" : true
+                            },
+                            "type" : "string",
+                            "valueGenerator" : {
+                                "type" : "UUID"
+                            }
+                        }
+                    },
+                    "type" : "object"
+                },
+                "type" : "array"
+            },
+            "legalEntities#" : {
+                "access" : {
+                    "find" : [
+                        "anyone"
+                    ]
+                },
+                "type" : "integer"
+            },
+            "migratedFrom" : {
+                "access" : {
+                    "insert" : [
+                        "lb-migrateFields-insert"
+                    ],
+                    "update" : [
+                        "lb-migrateFields-update"
+                    ]
+                },
+                "type" : "string"
+            },
+            "migrationDate" : {
+                "access" : {
+                    "insert" : [
+                        "lb-migrateFields-insert"
+                    ],
+                    "update" : [
+                        "lb-migrateFields-update"
+                    ]
+                },
+                "type" : "date",
+                "valueGenerator" : {
+                    "type" : "CurrentTime"
+                }
+            },
+            "objectType" : {
+                "access" : {
+                    "find" : [
+                        "anyone"
+                    ],
+                    "update" : [
+                        "noone"
+                    ]
+                },
+                "constraints" : {
+                    "minLength" : 1,
+                    "required" : true
+                },
+                "type" : "string"
+            },
+            "personalInformation" : {
+                "fields" : {
+                    "birthDate" : {
+                        "type" : "date"
+                    },
+                    "firstName" : {
+                        "constraints" : {
+                            "required" : true
+                        },
+                        "type" : "string"
+                    },
+                    "lastNames" : {
+                        "constraints" : {
+                            "required" : true
+                        },
+                        "type" : "string"
+                    },
+                    "legacyCompanyName" : {
+                        "access" : {
+                            "find" : [
+                                "lb-classicServices-find",
+                                "lb-migrateFields-find"
+                            ],
+                            "insert" : [
+                                "lb-classicServices-insert",
+                                "lb-migrateFields-insert"
+                            ],
+                            "update" : [
+                                "lb-classicServices-update",
+                                "lb-migrateFields-update"
+                            ]
+                        },
+                        "type" : "string"
+                    },
+                    "localeCode" : {
+                        "type" : "string"
+                    },
+                    "middleNames" : {
+                        "type" : "string"
+                    },
+                    "newField" : {
+                        "type" : "string"
+                    },
+                    "prefix" : {
+                        "type" : "string"
+                    },
+                    "suffix" : {
+                        "type" : "string"
+                    },
+                    "timeZone" : {
+                        "type" : "string"
+                    }
+                },
+                "type" : "object"
+            },
+            "preferences" : {
+                "items" : {
+                    "fields" : {
+                        "code" : {
+                            "type" : "string"
+                        },
+                        "system" : {
+                            "type" : "string"
+                        },
+                        "value" : {
+                            "type" : "string"
+                        }
+                    },
+                    "type" : "object"
+                },
+                "type" : "array"
+            },
+            "preferences#" : {
+                "access" : {
+                    "find" : [
+                        "anyone"
+                    ]
+                },
+                "type" : "integer"
+            },
+            "simpleUserId" : {
+                "access" : {
+                    "find" : [
+                        "lb-user-simpleUserId-find"
+                    ],
+                    "insert" : [
+                        "lb-user-simpleUserId-insert"
+                    ],
+                    "update" : [
+                        "lb-user-simpleUserId-update"
+                    ]
+                },
+                "type" : "integer"
+            },
+            "simpleUserPromoCode" : {
+                "access" : {
+                    "find" : [
+                        "lb-migrateFields-find",
+                        "lb-user-simpleUser-find"
+                    ],
+                    "insert" : [
+                        "lb-migrateFields-insert",
+                        "lb-user-simpleUser-insert"
+                    ],
+                    "update" : [
+                        "lb-migrateFields-update",
+                        "lb-user-simpleUser-update"
+                    ]
+                },
+                "type" : "string"
+            },
+            "status" : {
+                "constraints" : {
+                    "enum" : "status",
+                    "required" : true
+                },
+                "type" : "string"
+            }
+        },
+        "name" : "user",
+        "status" : {
+            "value" : "active"
+        },
+        "version" : {
+            "changelog" : "Added new field",
+            "value" : "0.0.9-SNAPSHOT"
+        }
+    }
+}
