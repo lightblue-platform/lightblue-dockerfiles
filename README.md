@@ -23,6 +23,21 @@ terraform apply -var 'lightblue_version=2.7.0'
 ```
 By default, latest version is taken. See Docker Hub for a list of all available [lightblue versions](https://hub.docker.com/r/lightblue/lightblue/tags/). For 1.x versions you'll need to use 1.x branch of this repository.
 
+# Running using docker-compose
+
+To install docker-compose, follow the OS specific installation instructions [here](https://docs.docker.com/compose/install/).
+
+Clone this repository, then in the root folder of the repo
+```
+docker-compose up
+```
+
+Use 
+```
+docker-compose stop
+```
+to stop the containers.
+
 Once started, you will have following services available:
 
 * Data endpoint: http://localhost:8080/rest/data
