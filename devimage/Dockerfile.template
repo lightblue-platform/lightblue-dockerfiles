@@ -1,0 +1,8 @@
+FROM jboss/wildfly:10.0.0.Final
+MAINTAINER Burak Serdar <bserdar@redhat.com>
+
+ENV JBOSS_HOME=/opt/jboss/wildfly/
+
+RUN mkdir -p $JBOSS_HOME/modules/com/redhat/lightblue/main
+
+ADD lightblue_config $JBOSS_HOME/modules/com/redhat/lightblue/main/
