@@ -1,0 +1,27 @@
+{
+    "controllers": [
+        {
+            "backend": "mongo",
+            "controllerFactory": "com.redhat.lightblue.mongo.config.MongoCRUDFactory",
+            "extensions": {
+                "locking": [
+                    {
+                        "collection": "locks",
+                        "datasource": "mongodata",
+                        "domain": "ESB"
+                    },
+                    {
+                        "collection": "migrationLocks",
+                        "datasource": "mongodata",
+                        "domain": "migration"
+                    },
+                    {
+                        "collection" : "appLocs",
+                        "datasource": "mongodata",
+                        "domain":"app"
+                    }
+                ]
+            }
+        }
+    ]
+}

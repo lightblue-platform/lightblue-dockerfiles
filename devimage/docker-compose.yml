@@ -1,0 +1,16 @@
+mongodb:
+  image: mongo
+  entrypoint: mongod --rest --httpinterface --smallfiles
+
+lightblue:
+  image: lightblue:dev
+  ports:
+   - "8080:8080"
+   - "9990:9990"
+  entrypoint: /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0 -Djboss.bind.address.management=0.0.0.0
+ # volumes:
+   #- ./drupal/:/var/www/html:rw
+  links:
+   - mongodb
+  tty: true
+
